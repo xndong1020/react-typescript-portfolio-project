@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react'
 
-export const RegisterForm = () => {
-  return <div>RegisterForm</div>;
-};
+export const RegisterForm = (): JSX.Element => {
+  return <div>RegisterForm</div>
+}

@@ -1,28 +1,28 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Formik, Form, Field } from "formik";
-import { LoginFormSchema } from "./LoginFormSchema";
-import { LoginUserAsync } from "../_actions/auth/actionCreators";
-import { RootState } from "../_store/configureStore";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Formik, Form, Field } from 'formik'
+import { LoginFormSchema } from './LoginFormSchema'
+import { LoginUserAsync } from '../_actions/auth/actionCreators'
+import { RootState } from '../_store/configureStore'
+import { useHistory } from 'react-router-dom'
 
-export const LoginForm = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+export const LoginForm = (): JSX.Element => {
+  const dispatch = useDispatch()
+  const history = useHistory()
 
-  const { hasLoggedIn } = useSelector((state: RootState) => state.auth);
+  const { hasLoggedIn } = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
     if (hasLoggedIn) {
-      history.push("/home");
+      history.push('/home')
     }
-  }, [hasLoggedIn, history]);
+  }, [hasLoggedIn, history])
 
   const handleSubmit = (user: { email: string; password: string }) => {
-    dispatch(LoginUserAsync(user));
-  };
+    dispatch(LoginUserAsync(user))
+  }
 
-  const initialValues = { email: "", password: "" };
+  const initialValues = { email: '', password: '' }
 
   return (
     <>
@@ -31,26 +31,26 @@ export const LoginForm = () => {
         initialValues={initialValues}
         validationSchema={LoginFormSchema}
         onSubmit={(values, actions) => {
-          handleSubmit(values);
-          actions.setSubmitting(false);
+          handleSubmit(values)
+          actions.setSubmitting(false)
         }}
         validateOnBlur
       >
         {({ errors, touched }) => (
           <Form>
-            <label htmlFor="email">Email</label>
+            <label htmlFor='email'>Email</label>
             <div>
-              <Field id="email" name="email" placeholder="email" type="email" />
+              <Field id='email' name='email' placeholder='email' type='email' />
             </div>
             <div>
               {errors.email && touched.email ? <div>{errors.email}</div> : null}
             </div>
             <div>
               <Field
-                id="password"
-                name="password"
-                placeholder="password"
-                type="password"
+                id='password'
+                name='password'
+                placeholder='password'
+                type='password'
               />
             </div>
             <div>
@@ -58,10 +58,10 @@ export const LoginForm = () => {
                 <div>{errors.password}</div>
               ) : null}
             </div>
-            <button type="submit">Submit</button>
+            <button type='submit'>Submit</button>
           </Form>
         )}
       </Formik>
     </>
-  );
-};
+  )
+}
